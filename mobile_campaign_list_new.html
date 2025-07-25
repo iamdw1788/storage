@@ -171,6 +171,7 @@
     </div>
 
     <div class="campaign-list" id="campaign-list"></div>
+    <div id="pagination" style="display:flex; justify-content:center; align-items:center; gap:12px; margin-top:24px;"></div>
 
     <script>
         // 최신 관리자 기준 캠페인 정보
@@ -321,22 +322,101 @@
             summaryArrow.textContent = summaryOpen ? '▲' : '▼';
         });
 
-        // 캠페인 카드 렌더링
+        // 페이징 처리
         const list = document.getElementById('campaign-list');
-        list.innerHTML = campaigns.map((c, idx) => `
-            <div class="campaign-card">
-                ${c.type === 'KT기본 상품' ? `<span class="badge">KT기본 상품</span>` : `<div class="campaign-type">${c.type}</div>`}
-                <div class="campaign-thumbnail" data-url="${c.url}" style="cursor:pointer;">
-                    ${c.thumbnail ? `<img src="${c.thumbnail}" alt="캠페인 썸네일">` : ''}
+        const pagination = document.getElementById('pagination');
+        const PAGE_SIZE = 5;
+        let currentPage = 1;
+        const totalPages = Math.ceil(campaigns.length / PAGE_SIZE);
+
+        function renderCampaignPage(page) {
+            const startIdx = (page - 1) * PAGE_SIZE;
+            const endIdx = startIdx + PAGE_SIZE;
+            const pageCampaigns = campaigns.slice(startIdx, endIdx);
+            list.innerHTML = pageCampaigns.map((c, idx) => `
+                <div class="campaign-card">
+                    ${c.type === 'KT기본 상품' ? `<span class="badge">KT기본 상품</span>` : `<div class="campaign-type">${c.type}</div>`}
+                    <div class="campaign-thumbnail" data-url="${c.url}" style="cursor:pointer;">
+                        ${c.thumbnail ? `<img src="${c.thumbnail}" alt="캠페인 썸네일">` : ''}
+                    </div>
+                    <div class="campaign-title">${c.title}</div>
+                    <div class="campaign-period">${c.period}</div>
+                    <a href="${c.url}" class="campaign-url">
+                        ${c.url}
+                        <span class="copy-icon">📋</span>
+                    </a>
                 </div>
-                <div class="campaign-title">${c.title}</div>
-                <div class="campaign-period">${c.period}</div>
-                <a href="${c.url}" class="campaign-url">
-                    ${c.url}
-                    <span class="copy-icon">📋</span>
-                </a>
-            </div>
-        `).join('');
+            `).join('');
+
+            // 이미지 클릭 시 preview 링크로 이동
+            document.querySelectorAll('.campaign-thumbnail').forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const url = this.getAttribute('data-url');
+                    window.open(url, '_blank');
+                });
+            });
+
+            // URL 복사 기능
+            document.querySelectorAll('.copy-icon').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const url = this.parentElement.href;
+                    navigator.clipboard.writeText(url).then(() => {
+                        alert('URL이 복사되었습니다.');
+                    });
+                });
+            });
+        }
+
+        function renderPagination() {
+            pagination.innerHTML = '';
+            if (totalPages <= 1) return;
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '이전';
+            prevBtn.style.padding = '6px 16px';
+            prevBtn.style.borderRadius = '6px';
+            prevBtn.style.border = '1px solid #e3e3e3';
+            prevBtn.style.background = currentPage === 1 ? '#f0f0f0' : '#0087cf';
+            prevBtn.style.color = currentPage === 1 ? '#aaa' : '#fff';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderCampaignPage(currentPage);
+                    renderPagination();
+                }
+            };
+            pagination.appendChild(prevBtn);
+
+            // 페이지 번호 표시
+            const pageInfo = document.createElement('span');
+            pageInfo.textContent = `${currentPage} / ${totalPages}`;
+            pageInfo.style.fontSize = '15px';
+            pageInfo.style.fontWeight = '600';
+            pageInfo.style.color = '#0087cf';
+            pagination.appendChild(pageInfo);
+
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '다음';
+            nextBtn.style.padding = '6px 16px';
+            nextBtn.style.borderRadius = '6px';
+            nextBtn.style.border = '1px solid #e3e3e3';
+            nextBtn.style.background = currentPage === totalPages ? '#f0f0f0' : '#0087cf';
+            nextBtn.style.color = currentPage === totalPages ? '#aaa' : '#fff';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderCampaignPage(currentPage);
+                    renderPagination();
+                }
+            };
+            pagination.appendChild(nextBtn);
+        }
+
+        // 최초 렌더링
+        renderCampaignPage(currentPage);
+        renderPagination();
 
         // 이미지 클릭 시 preview 링크로 이동
         document.querySelectorAll('.campaign-thumbnail').forEach(thumbnail => {
