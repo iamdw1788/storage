@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KT 캠페인 목록</title>
+    <title>KT바로페이지 캠페인 목록</title>
     <style>
         * {
             margin: 0;
@@ -13,221 +13,419 @@
         }
 
         body {
-            background-color: #f5f5f5;
+            background: #f5f6fa;
             padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
         }
 
         .header {
-            margin-bottom: 20px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        #campaign-summary {
+            margin-bottom: 28px;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 26px;
             color: #0087cf;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            color: #555;
+            font-size: 15px;
         }
 
         .campaign-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
 
         .campaign-card {
-            background: white;
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: #fff;
+            border-radius: 18px;
+            padding: 28px 22px 24px 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            transition: box-shadow 0.2s;
+            border: 1px solid #e3e3e3;
+            position: relative;
+        }
+
+        .campaign-card:hover {
+            box-shadow: 0 6px 18px rgba(0,135,207,0.10);
         }
 
         .campaign-thumbnail {
             width: 100%;
             height: 150px;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .campaign-thumbnail img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            background-color: #f0f0f0;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #0087cf 60%, #00bcd4 100%);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 999px;
+            padding: 4px 14px;
+            margin-bottom: 18px; /* 기존 10px -> 18px */
+            box-shadow: 0 2px 8px rgba(0,135,207,0.08);
+            letter-spacing: -0.5px;
         }
 
         .campaign-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 19px;
+            font-weight: 700;
             margin-bottom: 8px;
-            color: #333;
+            color: #222;
+            line-height: 1.4;
         }
 
         .campaign-period {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 12px;
+            font-size: 15px;
+            color: #0087cf;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .campaign-period::before {
+            content: "📅 캠페인 기간 :";
+            font-size: 15px;
+            color: #1976d2;
+            margin-right: 4px;
         }
 
         .campaign-url {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: #f0f0f0;
-            padding: 8px 12px;
-            border-radius: 6px;
+            background: #f8f9fa;
+            padding: 10px 14px;
+            border-radius: 8px;
             font-size: 14px;
             color: #0087cf;
             text-decoration: none;
             word-break: break-all;
+            transition: background-color 0.2s ease;
+            border: 1px solid #e3e3e3;
+        }
+
+        .campaign-url:hover {
+            background-color: #e3f2fd;
         }
 
         .copy-icon {
             color: #666;
             cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-icon:hover {
+            background-color: rgba(0,0,0,0.08);
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>KT 캠페인</h1>
-        <p>현재 진행 중인 캠페인 목록입니다.</p>
+        <h1>KT 바로페이지 캠페인 목록</h1>
+        <p>와플 아웃바운드 진행 시 발송중인 캠페인 목록입니다.</p>
     </div>
 
-    <div class="campaign-list">
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign13-1743465974630/thumbnail.png" alt="캠페인 썸네일">
+    <!-- 7월 신규 캠페인 요약 접힘 영역 (카드형) -->
+    <div id="campaign-summary" class="campaign-summary-collapsed">
+        <div id="summary-toggle" style="cursor:pointer;">
+            <div class="campaign-card" style="margin-bottom:0;">
+                <span class="badge">7월 신규 캠페인</span>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span id="summary-count" style="font-weight:600; color:#0087cf;"></span>
+                    <span style="color:#222; font-size:15px;">캠페인(펼쳐보기)*</span>
+                    <span id="summary-arrow" style="margin-left:auto; font-size:18px;">▼</span>
+                </div>
+                <div id="summary-list" style="display:none; flex-direction:column; gap:10px; margin-top:12px;"></div>
             </div>
-            <div class="campaign-title">(안내) 캐치콜플러스 추천_소매</div>
-            <div class="campaign-period">2025-04-01 ~ 2025-05-31</div>
-            <a href="https://kt.baropage.com/tmpl/119/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/119/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign12-1743403662596/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 소상공인 상품(하이오더 등) 안내</div>
-            <div class="campaign-period">2025-03-17 ~ 2025-04-30</div>
-            <a href="https://kt.baropage.com/tmpl/118/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/118/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign11-1741163308007/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 기변+따로살아도가족결합</div>
-            <div class="campaign-period">2025-03-05 ~ 2025-04-01</div>
-            <a href="https://kt.baropage.com/tmpl/117/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/117/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign10-1741154385044/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 기변 펫 상조 추천</div>
-            <div class="campaign-period">2025-03-05 ~ 2025-03-31</div>
-            <a href="https://kt.baropage.com/tmpl/116/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/116/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign06-1736820298610/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 초등 자녀 기변 안내</div>
-            <div class="campaign-period">2025-01-14 ~ 2025-07-31</div>
-            <a href="https://kt.baropage.com/tmpl/112/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/112/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign05-1736815804732/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 키즈폰 신규 가망 고객</div>
-            <div class="campaign-period">2025-01-14 ~ 2025-07-31</div>
-            <a href="https://kt.baropage.com/tmpl/105/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/105/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/DefaultPage_new-1734341233989/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(공통) 디폴트 페이지_new</div>
-            <div class="campaign-period">2024-12-01 ~ 2025-07-31</div>
-            <a href="https://kt.baropage.com/tmpl/79/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/79/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign04_new-1734340534074/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 아이폰 단말 기변 안내_new</div>
-            <div class="campaign-period">2024-12-01 ~ 2025-07-31</div>
-            <a href="https://kt.baropage.com/tmpl/77/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/77/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign03_new-1734339825003/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 갤럭시 단말 기변 안내_new</div>
-            <div class="campaign-period">2025-01-24 ~ 2025-07-31</div>
-            <a href="https://kt.baropage.com/tmpl/73/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/73/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign02_new-1734330008402/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 기변+제휴카드 교체 발급_new</div>
-            <div class="campaign-period">2025-01-24 ~ 2025-07-31</div>
-            <a href="https://kt.baropage.com/tmpl/72/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/72/preview
-                <span class="copy-icon">📋</span>
-            </a>
-        </div>
-
-        <div class="campaign-card">
-            <div class="campaign-thumbnail">
-                <img src="https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign01_new-1734325163442/thumbnail.png" alt="캠페인 썸네일">
-            </div>
-            <div class="campaign-title">(정책) 기변/요금할인지원금 재약정</div>
-            <div class="campaign-period">2025-01-24 ~ 2025-07-31</div>
-            <a href="https://kt.baropage.com/tmpl/70/preview" class="campaign-url">
-                https://kt.baropage.com/tmpl/70/preview
-                <span class="copy-icon">📋</span>
-            </a>
         </div>
     </div>
+
+    <div class="campaign-list" id="campaign-list"></div>
+    <div id="pagination" style="display:flex; justify-content:center; align-items:center; gap:12px; margin-top:24px;"></div>
 
     <script>
+        // 최신 관리자 기준 캠페인 정보
+        const campaigns = [
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign23-1752537957268/thumbnail.png",
+                title: "폴더블 신모델 기변 안내_20~40대",
+                period: "2025-07-15 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/129/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign22-1752481146224/thumbnail.png",
+                title: "폴더블 신모델 기변 안내_50~60대",
+                period: "2025-07-15 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/128/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign21-1750643220088/thumbnail.png",
+                title: "(정책) 인터넷천만_무선기변&TV3년이상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/127/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign20-1750643091323/thumbnail.png",
+                title: "(정책) 인터넷천만_무선기변&인터넷3년이상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/126/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign19-1750643001339/thumbnail.png",
+                title: "(정책) 인터넷천만_무선기변&인터넷3년이상(AP미보유)",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/125/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign18-1750642865315/thumbnail.png",
+                title: "(고객케어) 인터넷천만_인터넷혜택대상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/124/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign17-1750227200413/thumbnail.png",
+                title: "(고객케어) 인터넷천만_TV혜택대상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/123/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign16-1750058499519/thumbnail.png",
+                title: "(고객케어) 인터넷천만_인터넷혜택대상자(AP미보유)",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/122/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign14-1745286143973/thumbnail.png",
+                title: "(디채시) 고용량 단말 이용고객 O2O특화모델 안내",
+                period: "2025-04-22 ~ 2025-12-31",
+                url: "https://kt.baropage.com/tmpl/120/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign06-1736820298610/thumbnail.png",
+                title: "(정책) 초등 자녀 기변 안내",
+                period: "2025-01-14 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/112/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign05-1736815804732/thumbnail.png",
+                title: "(정책) 키즈폰 신규 가망 고객",
+                period: "2025-01-14 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/105/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/DefaultPage_new-1734341233989/thumbnail.png",
+                title: "(공통) 디폴트 페이지_new",
+                period: "2024-12-01 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/79/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign04_new-1734340534074/thumbnail.png",
+                title: "(정책) 아이폰 단말 기변 안내_new",
+                period: "2024-12-01 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/77/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign03_new-1734339825003/thumbnail.png",
+                title: "(정책) 갤럭시 단말 기변 안내_new",
+                period: "2025-01-24 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/73/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign02_new-1734330008402/thumbnail.png",
+                title: "(정책) 기변+제휴카드 교체 발급_new",
+                period: "2025-01-24 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/72/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign01_new-1734325163442/thumbnail.png",
+                title: "기변/요금할인지원금 재약정",
+                period: "2025-01-24 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/70/preview"
+            }
+        ];
+
+        // 이번달 캠페인만 필터 (기간 내 오늘 포함)
+        const today = new Date();
+        function isThisMonthCampaign(c) {
+            // 기간: "YYYY-MM-DD ~ YYYY-MM-DD"
+            const [start, end] = c.period.split('~').map(s => s.trim());
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            return today >= startDate && today <= endDate && today.getMonth() === startDate.getMonth();
+        }
+        const thisMonthCampaigns = campaigns.filter(isThisMonthCampaign);
+
+        // 캠페인 요약 영역 렌더링 (카드 내부에 리스트)
+        const summaryCount = document.getElementById('summary-count');
+        const summaryList = document.getElementById('summary-list');
+        summaryCount.textContent = `${thisMonthCampaigns.length}개`;
+        summaryList.innerHTML = thisMonthCampaigns.map(c => `
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 0; gap:10px;">
+                <span style="font-size:14px; color:#222; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.title}</span>
+                <a href="${c.url}" target="_blank" style="background:#0087cf; color:#fff; border-radius:6px; padding:4px 12px; text-decoration:none; font-size:13px; font-weight:600;">바로가기</a>
+            </div>
+        `).join('');
+
+        // 접힘/펼침 토글 (카드 내부에 리스트)
+        const summaryToggle = document.getElementById('summary-toggle');
+        const summaryArrow = document.getElementById('summary-arrow');
+        let summaryOpen = false;
+        summaryToggle.addEventListener('click', function() {
+            summaryOpen = !summaryOpen;
+            summaryList.style.display = summaryOpen ? 'flex' : 'none';
+            summaryArrow.textContent = summaryOpen ? '▲' : '▼';
+        });
+
+        // 페이징 처리
+        const list = document.getElementById('campaign-list');
+        const pagination = document.getElementById('pagination');
+        const PAGE_SIZE = 5;
+        let currentPage = 1;
+        const totalPages = Math.ceil(campaigns.length / PAGE_SIZE);
+
+        function renderCampaignPage(page) {
+            const startIdx = (page - 1) * PAGE_SIZE;
+            const endIdx = startIdx + PAGE_SIZE;
+            const pageCampaigns = campaigns.slice(startIdx, endIdx);
+            list.innerHTML = pageCampaigns.map((c, idx) => `
+                <div class="campaign-card">
+                    ${c.type === 'KT기본 상품' ? `<span class="badge">KT기본 상품</span>` : `<div class="campaign-type">${c.type}</div>`}
+                    <div class="campaign-thumbnail" data-url="${c.url}" style="cursor:pointer;">
+                        ${c.thumbnail ? `<img src="${c.thumbnail}" alt="캠페인 썸네일">` : ''}
+                    </div>
+                    <div class="campaign-title">${c.title}</div>
+                    <div class="campaign-period">${c.period}</div>
+                    <a href="${c.url}" class="campaign-url">
+                        ${c.url}
+                        <span class="copy-icon">📋</span>
+                    </a>
+                </div>
+            `).join('');
+
+            // 이미지 클릭 시 preview 링크로 이동
+            document.querySelectorAll('.campaign-thumbnail').forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const url = this.getAttribute('data-url');
+                    window.open(url, '_blank');
+                });
+            });
+
+            // URL 복사 기능
+            document.querySelectorAll('.copy-icon').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const url = this.parentElement.href;
+                    navigator.clipboard.writeText(url).then(() => {
+                        alert('URL이 복사되었습니다.');
+                    });
+                });
+            });
+        }
+
+        function renderPagination() {
+            pagination.innerHTML = '';
+            if (totalPages <= 1) return;
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '이전';
+            prevBtn.style.padding = '6px 16px';
+            prevBtn.style.borderRadius = '6px';
+            prevBtn.style.border = '1px solid #e3e3e3';
+            prevBtn.style.background = currentPage === 1 ? '#f0f0f0' : '#0087cf';
+            prevBtn.style.color = currentPage === 1 ? '#aaa' : '#fff';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderCampaignPage(currentPage);
+                    renderPagination();
+                }
+            };
+            pagination.appendChild(prevBtn);
+
+            // 페이지 번호 표시
+            const pageInfo = document.createElement('span');
+            pageInfo.textContent = `${currentPage} / ${totalPages}`;
+            pageInfo.style.fontSize = '15px';
+            pageInfo.style.fontWeight = '600';
+            pageInfo.style.color = '#0087cf';
+            pagination.appendChild(pageInfo);
+
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '다음';
+            nextBtn.style.padding = '6px 16px';
+            nextBtn.style.borderRadius = '6px';
+            nextBtn.style.border = '1px solid #e3e3e3';
+            nextBtn.style.background = currentPage === totalPages ? '#f0f0f0' : '#0087cf';
+            nextBtn.style.color = currentPage === totalPages ? '#aaa' : '#fff';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderCampaignPage(currentPage);
+                    renderPagination();
+                }
+            };
+            pagination.appendChild(nextBtn);
+        }
+
+        // 최초 렌더링
+        renderCampaignPage(currentPage);
+        renderPagination();
+
+        // 이미지 클릭 시 preview 링크로 이동
+        document.querySelectorAll('.campaign-thumbnail').forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                window.open(url, '_blank');
+            });
+        });
+
         // URL 복사 기능
         document.querySelectorAll('.copy-icon').forEach(icon => {
             icon.addEventListener('click', function(e) {
