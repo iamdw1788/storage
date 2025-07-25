@@ -1,1882 +1,302 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="ko">
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<link rel="icon" href="/favicon.ico" />
-<title>바로 페이지 관리자</title>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css" />
-<link rel="stylesheet" as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script src="//code.jquery.com/jquery-1.11.0.min.js">
-</script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js">
-</script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js">
-</script>
-<link href="/css/chunk-vendors.4e82903b.css" rel="stylesheet" />
-<link href="/css/app.8d41782f.css" rel="stylesheet" />
-<style type="text/css" id="vuetify-theme-stylesheet">:root {
-  --v-anchor-base: #0087cf;
-  --v-primary-base: #0087cf;
-  --v-primary-lighten5: #c1ffff;
-  --v-primary-lighten4: #a3f4ff;
-  --v-primary-lighten3: #84d8ff;
-  --v-primary-lighten2: #64bcff;
-  --v-primary-lighten1: #40a1eb;
-  --v-primary-darken1: #006eb3;
-  --v-primary-darken2: #005698;
-  --v-primary-darken3: #003f7e;
-  --v-primary-darken4: #002a64;
-  --v-secondary-base: #2a3f54;
-  --v-secondary-lighten5: #a8bdd7;
-  --v-secondary-lighten4: #8da2bb;
-  --v-secondary-lighten3: #7388a0;
-  --v-secondary-lighten2: #5a6e86;
-  --v-secondary-lighten1: #42566c;
-  --v-secondary-darken1: #12293d;
-  --v-secondary-darken2: #001527;
-  --v-secondary-darken3: #000013;
-  --v-secondary-darken4: #000000;
-  --v-accent-base: #048ba8;
-  --v-accent-lighten5: #b6ffff;
-  --v-accent-lighten4: #98f9ff;
-  --v-accent-lighten3: #7addfc;
-  --v-accent-lighten2: #5cc1df;
-  --v-accent-lighten1: #3ba5c3;
-  --v-accent-darken1: #00718e;
-  --v-accent-darken2: #005974;
-  --v-accent-darken3: #00415b;
-  --v-accent-darken4: #002b44;
-  --v-error-base: #ef476f;
-  --v-error-lighten5: #ffd9f5;
-  --v-error-lighten4: #ffbcd9;
-  --v-error-lighten3: #ff9fbd;
-  --v-error-lighten2: #ff82a2;
-  --v-error-lighten1: #ff6588;
-  --v-error-darken1: #d02457;
-  --v-error-darken2: #b10040;
-  --v-error-darken3: #92002a;
-  --v-error-darken4: #740017;
-  --v-info-base: #2196f3;
-  --v-info-lighten5: #d4ffff;
-  --v-info-lighten4: #b5ffff;
-  --v-info-lighten3: #95e8ff;
-  --v-info-lighten2: #75ccff;
-  --v-info-lighten1: #51b0ff;
-  --v-info-darken1: #007cd6;
-  --v-info-darken2: #0064ba;
-  --v-info-darken3: #004d9f;
-  --v-info-darken4: #003784;
-  --v-success-base: #4caf50;
-  --v-success-lighten5: #dcffd6;
-  --v-success-lighten4: #beffba;
-  --v-success-lighten3: #a2ff9e;
-  --v-success-lighten2: #85e783;
-  --v-success-lighten1: #69cb69;
-  --v-success-darken1: #2d9437;
-  --v-success-darken2: #00791e;
-  --v-success-darken3: #006000;
-  --v-success-darken4: #004700;
-  --v-warning-base: #ffd166;
-  --v-warning-lighten5: #fffff1;
-  --v-warning-lighten4: #ffffd4;
-  --v-warning-lighten3: #ffffb8;
-  --v-warning-lighten2: #ffff9c;
-  --v-warning-lighten1: #ffed81;
-  --v-warning-darken1: #e1b64c;
-  --v-warning-darken2: #c39b31;
-  --v-warning-darken3: #a68111;
-  --v-warning-darken4: #896800;
-  --v-background-base: #ffffff;
-  --v-background-lighten5: #ffffff;
-  --v-background-lighten4: #ffffff;
-  --v-background-lighten3: #ffffff;
-  --v-background-lighten2: #ffffff;
-  --v-background-lighten1: #ffffff;
-  --v-background-darken1: #e2e2e2;
-  --v-background-darken2: #c6c6c6;
-  --v-background-darken3: #ababab;
-  --v-background-darken4: #919191;
-  --v-surface-base: #f2f5f8;
-  --v-surface-lighten5: #ffffff;
-  --v-surface-lighten4: #ffffff;
-  --v-surface-lighten3: #ffffff;
-  --v-surface-lighten2: #ffffff;
-  --v-surface-lighten1: #ffffff;
-  --v-surface-darken1: #d6d9db;
-  --v-surface-darken2: #babdc0;
-  --v-surface-darken3: #9fa2a5;
-  --v-surface-darken4: #85888a;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KT바로페이지 캠페인 목록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
 
-.v-application a { color: var(--v-anchor-base); }
-.v-application .primary {
-  background-color: var(--v-primary-base) !important;
-  border-color: var(--v-primary-base) !important;
-}
-.v-application .primary--text {
-  color: var(--v-primary-base) !important;
-  caret-color: var(--v-primary-base) !important;
-}
-.v-application .primary.lighten-5 {
-  background-color: var(--v-primary-lighten5) !important;
-  border-color: var(--v-primary-lighten5) !important;
-}
-.v-application .primary--text.text--lighten-5 {
-  color: var(--v-primary-lighten5) !important;
-  caret-color: var(--v-primary-lighten5) !important;
-}
-.v-application .primary.lighten-4 {
-  background-color: var(--v-primary-lighten4) !important;
-  border-color: var(--v-primary-lighten4) !important;
-}
-.v-application .primary--text.text--lighten-4 {
-  color: var(--v-primary-lighten4) !important;
-  caret-color: var(--v-primary-lighten4) !important;
-}
-.v-application .primary.lighten-3 {
-  background-color: var(--v-primary-lighten3) !important;
-  border-color: var(--v-primary-lighten3) !important;
-}
-.v-application .primary--text.text--lighten-3 {
-  color: var(--v-primary-lighten3) !important;
-  caret-color: var(--v-primary-lighten3) !important;
-}
-.v-application .primary.lighten-2 {
-  background-color: var(--v-primary-lighten2) !important;
-  border-color: var(--v-primary-lighten2) !important;
-}
-.v-application .primary--text.text--lighten-2 {
-  color: var(--v-primary-lighten2) !important;
-  caret-color: var(--v-primary-lighten2) !important;
-}
-.v-application .primary.lighten-1 {
-  background-color: var(--v-primary-lighten1) !important;
-  border-color: var(--v-primary-lighten1) !important;
-}
-.v-application .primary--text.text--lighten-1 {
-  color: var(--v-primary-lighten1) !important;
-  caret-color: var(--v-primary-lighten1) !important;
-}
-.v-application .primary.darken-1 {
-  background-color: var(--v-primary-darken1) !important;
-  border-color: var(--v-primary-darken1) !important;
-}
-.v-application .primary--text.text--darken-1 {
-  color: var(--v-primary-darken1) !important;
-  caret-color: var(--v-primary-darken1) !important;
-}
-.v-application .primary.darken-2 {
-  background-color: var(--v-primary-darken2) !important;
-  border-color: var(--v-primary-darken2) !important;
-}
-.v-application .primary--text.text--darken-2 {
-  color: var(--v-primary-darken2) !important;
-  caret-color: var(--v-primary-darken2) !important;
-}
-.v-application .primary.darken-3 {
-  background-color: var(--v-primary-darken3) !important;
-  border-color: var(--v-primary-darken3) !important;
-}
-.v-application .primary--text.text--darken-3 {
-  color: var(--v-primary-darken3) !important;
-  caret-color: var(--v-primary-darken3) !important;
-}
-.v-application .primary.darken-4 {
-  background-color: var(--v-primary-darken4) !important;
-  border-color: var(--v-primary-darken4) !important;
-}
-.v-application .primary--text.text--darken-4 {
-  color: var(--v-primary-darken4) !important;
-  caret-color: var(--v-primary-darken4) !important;
-}
-.v-application .secondary {
-  background-color: var(--v-secondary-base) !important;
-  border-color: var(--v-secondary-base) !important;
-}
-.v-application .secondary--text {
-  color: var(--v-secondary-base) !important;
-  caret-color: var(--v-secondary-base) !important;
-}
-.v-application .secondary.lighten-5 {
-  background-color: var(--v-secondary-lighten5) !important;
-  border-color: var(--v-secondary-lighten5) !important;
-}
-.v-application .secondary--text.text--lighten-5 {
-  color: var(--v-secondary-lighten5) !important;
-  caret-color: var(--v-secondary-lighten5) !important;
-}
-.v-application .secondary.lighten-4 {
-  background-color: var(--v-secondary-lighten4) !important;
-  border-color: var(--v-secondary-lighten4) !important;
-}
-.v-application .secondary--text.text--lighten-4 {
-  color: var(--v-secondary-lighten4) !important;
-  caret-color: var(--v-secondary-lighten4) !important;
-}
-.v-application .secondary.lighten-3 {
-  background-color: var(--v-secondary-lighten3) !important;
-  border-color: var(--v-secondary-lighten3) !important;
-}
-.v-application .secondary--text.text--lighten-3 {
-  color: var(--v-secondary-lighten3) !important;
-  caret-color: var(--v-secondary-lighten3) !important;
-}
-.v-application .secondary.lighten-2 {
-  background-color: var(--v-secondary-lighten2) !important;
-  border-color: var(--v-secondary-lighten2) !important;
-}
-.v-application .secondary--text.text--lighten-2 {
-  color: var(--v-secondary-lighten2) !important;
-  caret-color: var(--v-secondary-lighten2) !important;
-}
-.v-application .secondary.lighten-1 {
-  background-color: var(--v-secondary-lighten1) !important;
-  border-color: var(--v-secondary-lighten1) !important;
-}
-.v-application .secondary--text.text--lighten-1 {
-  color: var(--v-secondary-lighten1) !important;
-  caret-color: var(--v-secondary-lighten1) !important;
-}
-.v-application .secondary.darken-1 {
-  background-color: var(--v-secondary-darken1) !important;
-  border-color: var(--v-secondary-darken1) !important;
-}
-.v-application .secondary--text.text--darken-1 {
-  color: var(--v-secondary-darken1) !important;
-  caret-color: var(--v-secondary-darken1) !important;
-}
-.v-application .secondary.darken-2 {
-  background-color: var(--v-secondary-darken2) !important;
-  border-color: var(--v-secondary-darken2) !important;
-}
-.v-application .secondary--text.text--darken-2 {
-  color: var(--v-secondary-darken2) !important;
-  caret-color: var(--v-secondary-darken2) !important;
-}
-.v-application .secondary.darken-3 {
-  background-color: var(--v-secondary-darken3) !important;
-  border-color: var(--v-secondary-darken3) !important;
-}
-.v-application .secondary--text.text--darken-3 {
-  color: var(--v-secondary-darken3) !important;
-  caret-color: var(--v-secondary-darken3) !important;
-}
-.v-application .secondary.darken-4 {
-  background-color: var(--v-secondary-darken4) !important;
-  border-color: var(--v-secondary-darken4) !important;
-}
-.v-application .secondary--text.text--darken-4 {
-  color: var(--v-secondary-darken4) !important;
-  caret-color: var(--v-secondary-darken4) !important;
-}
-.v-application .accent {
-  background-color: var(--v-accent-base) !important;
-  border-color: var(--v-accent-base) !important;
-}
-.v-application .accent--text {
-  color: var(--v-accent-base) !important;
-  caret-color: var(--v-accent-base) !important;
-}
-.v-application .accent.lighten-5 {
-  background-color: var(--v-accent-lighten5) !important;
-  border-color: var(--v-accent-lighten5) !important;
-}
-.v-application .accent--text.text--lighten-5 {
-  color: var(--v-accent-lighten5) !important;
-  caret-color: var(--v-accent-lighten5) !important;
-}
-.v-application .accent.lighten-4 {
-  background-color: var(--v-accent-lighten4) !important;
-  border-color: var(--v-accent-lighten4) !important;
-}
-.v-application .accent--text.text--lighten-4 {
-  color: var(--v-accent-lighten4) !important;
-  caret-color: var(--v-accent-lighten4) !important;
-}
-.v-application .accent.lighten-3 {
-  background-color: var(--v-accent-lighten3) !important;
-  border-color: var(--v-accent-lighten3) !important;
-}
-.v-application .accent--text.text--lighten-3 {
-  color: var(--v-accent-lighten3) !important;
-  caret-color: var(--v-accent-lighten3) !important;
-}
-.v-application .accent.lighten-2 {
-  background-color: var(--v-accent-lighten2) !important;
-  border-color: var(--v-accent-lighten2) !important;
-}
-.v-application .accent--text.text--lighten-2 {
-  color: var(--v-accent-lighten2) !important;
-  caret-color: var(--v-accent-lighten2) !important;
-}
-.v-application .accent.lighten-1 {
-  background-color: var(--v-accent-lighten1) !important;
-  border-color: var(--v-accent-lighten1) !important;
-}
-.v-application .accent--text.text--lighten-1 {
-  color: var(--v-accent-lighten1) !important;
-  caret-color: var(--v-accent-lighten1) !important;
-}
-.v-application .accent.darken-1 {
-  background-color: var(--v-accent-darken1) !important;
-  border-color: var(--v-accent-darken1) !important;
-}
-.v-application .accent--text.text--darken-1 {
-  color: var(--v-accent-darken1) !important;
-  caret-color: var(--v-accent-darken1) !important;
-}
-.v-application .accent.darken-2 {
-  background-color: var(--v-accent-darken2) !important;
-  border-color: var(--v-accent-darken2) !important;
-}
-.v-application .accent--text.text--darken-2 {
-  color: var(--v-accent-darken2) !important;
-  caret-color: var(--v-accent-darken2) !important;
-}
-.v-application .accent.darken-3 {
-  background-color: var(--v-accent-darken3) !important;
-  border-color: var(--v-accent-darken3) !important;
-}
-.v-application .accent--text.text--darken-3 {
-  color: var(--v-accent-darken3) !important;
-  caret-color: var(--v-accent-darken3) !important;
-}
-.v-application .accent.darken-4 {
-  background-color: var(--v-accent-darken4) !important;
-  border-color: var(--v-accent-darken4) !important;
-}
-.v-application .accent--text.text--darken-4 {
-  color: var(--v-accent-darken4) !important;
-  caret-color: var(--v-accent-darken4) !important;
-}
-.v-application .error {
-  background-color: var(--v-error-base) !important;
-  border-color: var(--v-error-base) !important;
-}
-.v-application .error--text {
-  color: var(--v-error-base) !important;
-  caret-color: var(--v-error-base) !important;
-}
-.v-application .error.lighten-5 {
-  background-color: var(--v-error-lighten5) !important;
-  border-color: var(--v-error-lighten5) !important;
-}
-.v-application .error--text.text--lighten-5 {
-  color: var(--v-error-lighten5) !important;
-  caret-color: var(--v-error-lighten5) !important;
-}
-.v-application .error.lighten-4 {
-  background-color: var(--v-error-lighten4) !important;
-  border-color: var(--v-error-lighten4) !important;
-}
-.v-application .error--text.text--lighten-4 {
-  color: var(--v-error-lighten4) !important;
-  caret-color: var(--v-error-lighten4) !important;
-}
-.v-application .error.lighten-3 {
-  background-color: var(--v-error-lighten3) !important;
-  border-color: var(--v-error-lighten3) !important;
-}
-.v-application .error--text.text--lighten-3 {
-  color: var(--v-error-lighten3) !important;
-  caret-color: var(--v-error-lighten3) !important;
-}
-.v-application .error.lighten-2 {
-  background-color: var(--v-error-lighten2) !important;
-  border-color: var(--v-error-lighten2) !important;
-}
-.v-application .error--text.text--lighten-2 {
-  color: var(--v-error-lighten2) !important;
-  caret-color: var(--v-error-lighten2) !important;
-}
-.v-application .error.lighten-1 {
-  background-color: var(--v-error-lighten1) !important;
-  border-color: var(--v-error-lighten1) !important;
-}
-.v-application .error--text.text--lighten-1 {
-  color: var(--v-error-lighten1) !important;
-  caret-color: var(--v-error-lighten1) !important;
-}
-.v-application .error.darken-1 {
-  background-color: var(--v-error-darken1) !important;
-  border-color: var(--v-error-darken1) !important;
-}
-.v-application .error--text.text--darken-1 {
-  color: var(--v-error-darken1) !important;
-  caret-color: var(--v-error-darken1) !important;
-}
-.v-application .error.darken-2 {
-  background-color: var(--v-error-darken2) !important;
-  border-color: var(--v-error-darken2) !important;
-}
-.v-application .error--text.text--darken-2 {
-  color: var(--v-error-darken2) !important;
-  caret-color: var(--v-error-darken2) !important;
-}
-.v-application .error.darken-3 {
-  background-color: var(--v-error-darken3) !important;
-  border-color: var(--v-error-darken3) !important;
-}
-.v-application .error--text.text--darken-3 {
-  color: var(--v-error-darken3) !important;
-  caret-color: var(--v-error-darken3) !important;
-}
-.v-application .error.darken-4 {
-  background-color: var(--v-error-darken4) !important;
-  border-color: var(--v-error-darken4) !important;
-}
-.v-application .error--text.text--darken-4 {
-  color: var(--v-error-darken4) !important;
-  caret-color: var(--v-error-darken4) !important;
-}
-.v-application .info {
-  background-color: var(--v-info-base) !important;
-  border-color: var(--v-info-base) !important;
-}
-.v-application .info--text {
-  color: var(--v-info-base) !important;
-  caret-color: var(--v-info-base) !important;
-}
-.v-application .info.lighten-5 {
-  background-color: var(--v-info-lighten5) !important;
-  border-color: var(--v-info-lighten5) !important;
-}
-.v-application .info--text.text--lighten-5 {
-  color: var(--v-info-lighten5) !important;
-  caret-color: var(--v-info-lighten5) !important;
-}
-.v-application .info.lighten-4 {
-  background-color: var(--v-info-lighten4) !important;
-  border-color: var(--v-info-lighten4) !important;
-}
-.v-application .info--text.text--lighten-4 {
-  color: var(--v-info-lighten4) !important;
-  caret-color: var(--v-info-lighten4) !important;
-}
-.v-application .info.lighten-3 {
-  background-color: var(--v-info-lighten3) !important;
-  border-color: var(--v-info-lighten3) !important;
-}
-.v-application .info--text.text--lighten-3 {
-  color: var(--v-info-lighten3) !important;
-  caret-color: var(--v-info-lighten3) !important;
-}
-.v-application .info.lighten-2 {
-  background-color: var(--v-info-lighten2) !important;
-  border-color: var(--v-info-lighten2) !important;
-}
-.v-application .info--text.text--lighten-2 {
-  color: var(--v-info-lighten2) !important;
-  caret-color: var(--v-info-lighten2) !important;
-}
-.v-application .info.lighten-1 {
-  background-color: var(--v-info-lighten1) !important;
-  border-color: var(--v-info-lighten1) !important;
-}
-.v-application .info--text.text--lighten-1 {
-  color: var(--v-info-lighten1) !important;
-  caret-color: var(--v-info-lighten1) !important;
-}
-.v-application .info.darken-1 {
-  background-color: var(--v-info-darken1) !important;
-  border-color: var(--v-info-darken1) !important;
-}
-.v-application .info--text.text--darken-1 {
-  color: var(--v-info-darken1) !important;
-  caret-color: var(--v-info-darken1) !important;
-}
-.v-application .info.darken-2 {
-  background-color: var(--v-info-darken2) !important;
-  border-color: var(--v-info-darken2) !important;
-}
-.v-application .info--text.text--darken-2 {
-  color: var(--v-info-darken2) !important;
-  caret-color: var(--v-info-darken2) !important;
-}
-.v-application .info.darken-3 {
-  background-color: var(--v-info-darken3) !important;
-  border-color: var(--v-info-darken3) !important;
-}
-.v-application .info--text.text--darken-3 {
-  color: var(--v-info-darken3) !important;
-  caret-color: var(--v-info-darken3) !important;
-}
-.v-application .info.darken-4 {
-  background-color: var(--v-info-darken4) !important;
-  border-color: var(--v-info-darken4) !important;
-}
-.v-application .info--text.text--darken-4 {
-  color: var(--v-info-darken4) !important;
-  caret-color: var(--v-info-darken4) !important;
-}
-.v-application .success {
-  background-color: var(--v-success-base) !important;
-  border-color: var(--v-success-base) !important;
-}
-.v-application .success--text {
-  color: var(--v-success-base) !important;
-  caret-color: var(--v-success-base) !important;
-}
-.v-application .success.lighten-5 {
-  background-color: var(--v-success-lighten5) !important;
-  border-color: var(--v-success-lighten5) !important;
-}
-.v-application .success--text.text--lighten-5 {
-  color: var(--v-success-lighten5) !important;
-  caret-color: var(--v-success-lighten5) !important;
-}
-.v-application .success.lighten-4 {
-  background-color: var(--v-success-lighten4) !important;
-  border-color: var(--v-success-lighten4) !important;
-}
-.v-application .success--text.text--lighten-4 {
-  color: var(--v-success-lighten4) !important;
-  caret-color: var(--v-success-lighten4) !important;
-}
-.v-application .success.lighten-3 {
-  background-color: var(--v-success-lighten3) !important;
-  border-color: var(--v-success-lighten3) !important;
-}
-.v-application .success--text.text--lighten-3 {
-  color: var(--v-success-lighten3) !important;
-  caret-color: var(--v-success-lighten3) !important;
-}
-.v-application .success.lighten-2 {
-  background-color: var(--v-success-lighten2) !important;
-  border-color: var(--v-success-lighten2) !important;
-}
-.v-application .success--text.text--lighten-2 {
-  color: var(--v-success-lighten2) !important;
-  caret-color: var(--v-success-lighten2) !important;
-}
-.v-application .success.lighten-1 {
-  background-color: var(--v-success-lighten1) !important;
-  border-color: var(--v-success-lighten1) !important;
-}
-.v-application .success--text.text--lighten-1 {
-  color: var(--v-success-lighten1) !important;
-  caret-color: var(--v-success-lighten1) !important;
-}
-.v-application .success.darken-1 {
-  background-color: var(--v-success-darken1) !important;
-  border-color: var(--v-success-darken1) !important;
-}
-.v-application .success--text.text--darken-1 {
-  color: var(--v-success-darken1) !important;
-  caret-color: var(--v-success-darken1) !important;
-}
-.v-application .success.darken-2 {
-  background-color: var(--v-success-darken2) !important;
-  border-color: var(--v-success-darken2) !important;
-}
-.v-application .success--text.text--darken-2 {
-  color: var(--v-success-darken2) !important;
-  caret-color: var(--v-success-darken2) !important;
-}
-.v-application .success.darken-3 {
-  background-color: var(--v-success-darken3) !important;
-  border-color: var(--v-success-darken3) !important;
-}
-.v-application .success--text.text--darken-3 {
-  color: var(--v-success-darken3) !important;
-  caret-color: var(--v-success-darken3) !important;
-}
-.v-application .success.darken-4 {
-  background-color: var(--v-success-darken4) !important;
-  border-color: var(--v-success-darken4) !important;
-}
-.v-application .success--text.text--darken-4 {
-  color: var(--v-success-darken4) !important;
-  caret-color: var(--v-success-darken4) !important;
-}
-.v-application .warning {
-  background-color: var(--v-warning-base) !important;
-  border-color: var(--v-warning-base) !important;
-}
-.v-application .warning--text {
-  color: var(--v-warning-base) !important;
-  caret-color: var(--v-warning-base) !important;
-}
-.v-application .warning.lighten-5 {
-  background-color: var(--v-warning-lighten5) !important;
-  border-color: var(--v-warning-lighten5) !important;
-}
-.v-application .warning--text.text--lighten-5 {
-  color: var(--v-warning-lighten5) !important;
-  caret-color: var(--v-warning-lighten5) !important;
-}
-.v-application .warning.lighten-4 {
-  background-color: var(--v-warning-lighten4) !important;
-  border-color: var(--v-warning-lighten4) !important;
-}
-.v-application .warning--text.text--lighten-4 {
-  color: var(--v-warning-lighten4) !important;
-  caret-color: var(--v-warning-lighten4) !important;
-}
-.v-application .warning.lighten-3 {
-  background-color: var(--v-warning-lighten3) !important;
-  border-color: var(--v-warning-lighten3) !important;
-}
-.v-application .warning--text.text--lighten-3 {
-  color: var(--v-warning-lighten3) !important;
-  caret-color: var(--v-warning-lighten3) !important;
-}
-.v-application .warning.lighten-2 {
-  background-color: var(--v-warning-lighten2) !important;
-  border-color: var(--v-warning-lighten2) !important;
-}
-.v-application .warning--text.text--lighten-2 {
-  color: var(--v-warning-lighten2) !important;
-  caret-color: var(--v-warning-lighten2) !important;
-}
-.v-application .warning.lighten-1 {
-  background-color: var(--v-warning-lighten1) !important;
-  border-color: var(--v-warning-lighten1) !important;
-}
-.v-application .warning--text.text--lighten-1 {
-  color: var(--v-warning-lighten1) !important;
-  caret-color: var(--v-warning-lighten1) !important;
-}
-.v-application .warning.darken-1 {
-  background-color: var(--v-warning-darken1) !important;
-  border-color: var(--v-warning-darken1) !important;
-}
-.v-application .warning--text.text--darken-1 {
-  color: var(--v-warning-darken1) !important;
-  caret-color: var(--v-warning-darken1) !important;
-}
-.v-application .warning.darken-2 {
-  background-color: var(--v-warning-darken2) !important;
-  border-color: var(--v-warning-darken2) !important;
-}
-.v-application .warning--text.text--darken-2 {
-  color: var(--v-warning-darken2) !important;
-  caret-color: var(--v-warning-darken2) !important;
-}
-.v-application .warning.darken-3 {
-  background-color: var(--v-warning-darken3) !important;
-  border-color: var(--v-warning-darken3) !important;
-}
-.v-application .warning--text.text--darken-3 {
-  color: var(--v-warning-darken3) !important;
-  caret-color: var(--v-warning-darken3) !important;
-}
-.v-application .warning.darken-4 {
-  background-color: var(--v-warning-darken4) !important;
-  border-color: var(--v-warning-darken4) !important;
-}
-.v-application .warning--text.text--darken-4 {
-  color: var(--v-warning-darken4) !important;
-  caret-color: var(--v-warning-darken4) !important;
-}
-.v-application .background {
-  background-color: var(--v-background-base) !important;
-  border-color: var(--v-background-base) !important;
-}
-.v-application .background--text {
-  color: var(--v-background-base) !important;
-  caret-color: var(--v-background-base) !important;
-}
-.v-application .background.lighten-5 {
-  background-color: var(--v-background-lighten5) !important;
-  border-color: var(--v-background-lighten5) !important;
-}
-.v-application .background--text.text--lighten-5 {
-  color: var(--v-background-lighten5) !important;
-  caret-color: var(--v-background-lighten5) !important;
-}
-.v-application .background.lighten-4 {
-  background-color: var(--v-background-lighten4) !important;
-  border-color: var(--v-background-lighten4) !important;
-}
-.v-application .background--text.text--lighten-4 {
-  color: var(--v-background-lighten4) !important;
-  caret-color: var(--v-background-lighten4) !important;
-}
-.v-application .background.lighten-3 {
-  background-color: var(--v-background-lighten3) !important;
-  border-color: var(--v-background-lighten3) !important;
-}
-.v-application .background--text.text--lighten-3 {
-  color: var(--v-background-lighten3) !important;
-  caret-color: var(--v-background-lighten3) !important;
-}
-.v-application .background.lighten-2 {
-  background-color: var(--v-background-lighten2) !important;
-  border-color: var(--v-background-lighten2) !important;
-}
-.v-application .background--text.text--lighten-2 {
-  color: var(--v-background-lighten2) !important;
-  caret-color: var(--v-background-lighten2) !important;
-}
-.v-application .background.lighten-1 {
-  background-color: var(--v-background-lighten1) !important;
-  border-color: var(--v-background-lighten1) !important;
-}
-.v-application .background--text.text--lighten-1 {
-  color: var(--v-background-lighten1) !important;
-  caret-color: var(--v-background-lighten1) !important;
-}
-.v-application .background.darken-1 {
-  background-color: var(--v-background-darken1) !important;
-  border-color: var(--v-background-darken1) !important;
-}
-.v-application .background--text.text--darken-1 {
-  color: var(--v-background-darken1) !important;
-  caret-color: var(--v-background-darken1) !important;
-}
-.v-application .background.darken-2 {
-  background-color: var(--v-background-darken2) !important;
-  border-color: var(--v-background-darken2) !important;
-}
-.v-application .background--text.text--darken-2 {
-  color: var(--v-background-darken2) !important;
-  caret-color: var(--v-background-darken2) !important;
-}
-.v-application .background.darken-3 {
-  background-color: var(--v-background-darken3) !important;
-  border-color: var(--v-background-darken3) !important;
-}
-.v-application .background--text.text--darken-3 {
-  color: var(--v-background-darken3) !important;
-  caret-color: var(--v-background-darken3) !important;
-}
-.v-application .background.darken-4 {
-  background-color: var(--v-background-darken4) !important;
-  border-color: var(--v-background-darken4) !important;
-}
-.v-application .background--text.text--darken-4 {
-  color: var(--v-background-darken4) !important;
-  caret-color: var(--v-background-darken4) !important;
-}
-.v-application .surface {
-  background-color: var(--v-surface-base) !important;
-  border-color: var(--v-surface-base) !important;
-}
-.v-application .surface--text {
-  color: var(--v-surface-base) !important;
-  caret-color: var(--v-surface-base) !important;
-}
-.v-application .surface.lighten-5 {
-  background-color: var(--v-surface-lighten5) !important;
-  border-color: var(--v-surface-lighten5) !important;
-}
-.v-application .surface--text.text--lighten-5 {
-  color: var(--v-surface-lighten5) !important;
-  caret-color: var(--v-surface-lighten5) !important;
-}
-.v-application .surface.lighten-4 {
-  background-color: var(--v-surface-lighten4) !important;
-  border-color: var(--v-surface-lighten4) !important;
-}
-.v-application .surface--text.text--lighten-4 {
-  color: var(--v-surface-lighten4) !important;
-  caret-color: var(--v-surface-lighten4) !important;
-}
-.v-application .surface.lighten-3 {
-  background-color: var(--v-surface-lighten3) !important;
-  border-color: var(--v-surface-lighten3) !important;
-}
-.v-application .surface--text.text--lighten-3 {
-  color: var(--v-surface-lighten3) !important;
-  caret-color: var(--v-surface-lighten3) !important;
-}
-.v-application .surface.lighten-2 {
-  background-color: var(--v-surface-lighten2) !important;
-  border-color: var(--v-surface-lighten2) !important;
-}
-.v-application .surface--text.text--lighten-2 {
-  color: var(--v-surface-lighten2) !important;
-  caret-color: var(--v-surface-lighten2) !important;
-}
-.v-application .surface.lighten-1 {
-  background-color: var(--v-surface-lighten1) !important;
-  border-color: var(--v-surface-lighten1) !important;
-}
-.v-application .surface--text.text--lighten-1 {
-  color: var(--v-surface-lighten1) !important;
-  caret-color: var(--v-surface-lighten1) !important;
-}
-.v-application .surface.darken-1 {
-  background-color: var(--v-surface-darken1) !important;
-  border-color: var(--v-surface-darken1) !important;
-}
-.v-application .surface--text.text--darken-1 {
-  color: var(--v-surface-darken1) !important;
-  caret-color: var(--v-surface-darken1) !important;
-}
-.v-application .surface.darken-2 {
-  background-color: var(--v-surface-darken2) !important;
-  border-color: var(--v-surface-darken2) !important;
-}
-.v-application .surface--text.text--darken-2 {
-  color: var(--v-surface-darken2) !important;
-  caret-color: var(--v-surface-darken2) !important;
-}
-.v-application .surface.darken-3 {
-  background-color: var(--v-surface-darken3) !important;
-  border-color: var(--v-surface-darken3) !important;
-}
-.v-application .surface--text.text--darken-3 {
-  color: var(--v-surface-darken3) !important;
-  caret-color: var(--v-surface-darken3) !important;
-}
-.v-application .surface.darken-4 {
-  background-color: var(--v-surface-darken4) !important;
-  border-color: var(--v-surface-darken4) !important;
-}
-.v-application .surface--text.text--darken-4 {
-  color: var(--v-surface-darken4) !important;
-  caret-color: var(--v-surface-darken4) !important;
-}</style>
-<link rel="stylesheet" type="text/css" href="/css/chunk-64320852.520f532b.css" />
-<script charset="utf-8" src="/js/chunk-64320852.54ee0482.js">
-</script>
-<link rel="stylesheet" type="text/css" href="/css/chunk-787e3e4d.faac76fb.css" />
-<script charset="utf-8" src="/js/chunk-787e3e4d.27f02164.js">
-</script>
-<script charset="utf-8" src="/js/store-list.3d72fb0b.js">
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" />
-<link rel="stylesheet" type="text/css" href="/css/chunk-397e6c9e.d21c435b.css" />
-<script charset="utf-8" src="/js/chunk-397e6c9e.167ab026.js">
-</script>
-<link rel="stylesheet" type="text/css" href="/css/chunk-00646d22.2b74ec57.css" />
-<script charset="utf-8" src="/js/chunk-00646d22.66675d20.js">
-</script>
-<link rel="stylesheet" type="text/css" href="/css/chunk-480a112e.d01a3d7a.css" />
-<script charset="utf-8" src="/js/chunk-480a112e.aaba17b8.js">
-</script>
+        body {
+            background: #f5f6fa;
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            color: #0087cf;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            color: #555;
+            font-size: 15px;
+        }
+
+        .campaign-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .campaign-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 28px 22px 24px 22px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            transition: box-shadow 0.2s;
+            border: 1px solid #e3e3e3;
+            position: relative;
+        }
+
+        .campaign-card:hover {
+            box-shadow: 0 6px 18px rgba(0,135,207,0.10);
+        }
+
+        .campaign-thumbnail {
+            width: 100%;
+            height: 150px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .campaign-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #0087cf 60%, #00bcd4 100%);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 999px;
+            padding: 4px 14px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,135,207,0.08);
+            letter-spacing: -0.5px;
+        }
+
+        .campaign-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #222;
+            line-height: 1.4;
+        }
+
+        .campaign-period {
+            font-size: 15px;
+            color: #0087cf;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .campaign-period::before {
+            content: "📅 캠페인 기간 :";
+            font-size: 15px;
+            color: #1976d2;
+            margin-right: 4px;
+        }
+
+        .campaign-url {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f8f9fa;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #0087cf;
+            text-decoration: none;
+            word-break: break-all;
+            transition: background-color 0.2s ease;
+            border: 1px solid #e3e3e3;
+        }
+
+        .campaign-url:hover {
+            background-color: #e3f2fd;
+        }
+
+        .copy-icon {
+            color: #666;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-icon:hover {
+            background-color: rgba(0,0,0,0.08);
+        }
+    </style>
 </head>
 <body>
-<noscript>&lt;strong&gt;We're sorry but kt-waffle-admin-front doesn't work properly without JavaScript enabled. Please enable it to continue.&lt;/strong&gt;</noscript>
-<div data-app="true" class="v-application v-application--is-ltr theme--light" id="app">
-<div class="v-application--wrap">
-<div data-v-e0cb4de6="" class="d-flex flex-grow-1">
-<nav data-v-e0cb4de6="" class="elevation-1 v-navigation-drawer v-navigation-drawer--fixed v-navigation-drawer--floating v-navigation-drawer--open theme--light" data-booted="true" style="height: 100vh; top: 0px; max-height: calc(100% + 0px); transform: translateX(0%); width: 256px;">
-<div class="v-navigation-drawer__prepend">
-<div data-v-e0cb4de6="" class="pa-2">
-<div data-v-e0cb4de6="" class="title font-weight-bold text-uppercase primary--text"> 바로 페이지 관리자 </div>
-<div data-v-e0cb4de6="" class="overline grey--text">1.0.0</div>
-</div>
-</div>
-<div class="v-navigation-drawer__content">
-<div data-v-e0cb4de6="" class="v-list v-sheet theme--light v-list--dense v-list--flat v-list--nav">
-<div>
-<div class="pa-1 mt-2 overline text-subtitle-1 font-weight-bold"> 캠페인 관리 </div>
-<div>
-<div>
-<a href="/campaign/list" class="primary--text v-list-item--active v-list-item v-list-item--link theme--light" tabindex="0" aria-current="page">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-view-dashboard theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> KT 캠페인 </div>
-</div>
-</a>
-</div>
-<div>
-<a href="/campaign/my/list" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-view-list theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 내 캠페인 목록 </div>
-</div>
-</a>
-</div>
-</div>
-</div>
-<div>
-<div class="pa-1 mt-2 overline text-subtitle-1 font-weight-bold"> 통계 </div>
-<div>
-<div>
-<a href="/statistic/send" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-email-multiple theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 캠페인 전송 통계 </div>
-</div>
-</a>
-</div>
-<div>
-<a href="/statistic/click" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-cursor-default-click theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 캠페인 클릭 통계 </div>
-</div>
-</a>
-</div>
-<div>
-<a href="/statistic/indicator" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-chart-arc theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 캠페인 지표 </div>
-</div>
-</a>
-</div>
-</div>
-</div>
-<div>
-<div class="pa-1 mt-2 overline text-subtitle-1 font-weight-bold"> 고객 관리 </div>
-<div>
-<div>
-<a href="/customer/unsubscribe/list" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-email-off theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 수신거부내역 </div>
-</div>
-</a>
-</div>
-</div>
-</div>
-<div>
-<div class="pa-1 mt-2 overline text-subtitle-1 font-weight-bold"> 운영점/매장 관리 </div>
-<div>
-<div>
-<a href="/agent/list" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-office-building theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 운영점 목록 </div>
-</div>
-</a>
-</div>
-<div>
-<a href="/store/list" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-storefront theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 매장 목록 </div>
-</div>
-</a>
-</div>
-<!---->
-</div>
-</div>
-<div>
-<div class="pa-1 mt-2 overline text-subtitle-1 font-weight-bold"> 회원 관리 </div>
-<div>
-<div>
-<a href="/user" class="v-list-item v-list-item--link theme--light" tabindex="0">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-account-multiple theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 회원 정보 </div>
-</div>
-</a>
-</div>
-</div>
-</div>
-<div>
-<div class="pa-1 mt-2 overline text-subtitle-1 font-weight-bold"> 고객센터 </div>
-<div>
-<div>
-<a tabindex="0" href="https://icubeon0.notion.site/115286f860e480a6b1e9c4e13300478b?v=81aea137efe74057a59f2362cb6b2bef" target="_blank" class="v-list-item v-list-item--link theme--light">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-bullhorn theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 공지사항 </div>
-</div>
-</a>
-</div>
-<div>
-<a tabindex="0" href="https://icubeon0.notion.site/023f7c68dee24cd996e80218169f1fdf?pvs=4" target="_blank" class="v-list-item v-list-item--link theme--light">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-frequently-asked-questions theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 자주 묻는 질문 </div>
-</div>
-</a>
-</div>
-<div>
-<a tabindex="0" href="https://tally.so/r/mV10py" target="_blank" class="v-list-item v-list-item--link theme--light">
-<div class="v-list-item__icon">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-email-edit theme--light">
-</i>
-</div>
-<div class="v-list-item__content">
-<div class="v-list-item__title"> 문의하기 </div>
-</div>
-</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="v-navigation-drawer__append">
-<div data-v-e0cb4de6="" class="pa-1 text-center">
-<button data-v-e0cb4de6="" type="button" class="v-btn v-btn--text theme--light v-size--small">
-<span class="v-btn__content">  </span>
-</button>
-</div>
-</div>
-<div class="v-navigation-drawer__border">
-</div>
-</nav>
-<header data-v-e0cb4de6="" class="v-sheet theme--light v-toolbar v-app-bar v-app-bar--fixed" data-booted="true" style="height: 64px; margin-top: 0px; transform: translateY(0px); left: 256px; right: 0px;">
-<div class="v-toolbar__content" style="height: 64px;">
-<div data-v-e0cb4de6="" class="flex-grow-1 d-flex v-card v-card--flat v-sheet theme--light pa-0 ma-0">
-<div data-v-e0cb4de6="" class="d-flex flex-grow-1 align-center">
-<div data-v-e0cb4de6="" class="d-flex flex-grow-1 align-center">
-<button data-v-e0cb4de6="" type="button" class="v-app-bar__nav-icon v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i data-v-e0cb4de6="" aria-hidden="true" class="v-icon notranslate mdi mdi-menu theme--light">
-</i>
-</span>
-</button>
-<div data-v-e0cb4de6="" class="spacer">
-</div>
-<div data-v-e0cb4de6="" class="v-menu">
-<!---->
-</div>
-<button type="button" class="px-1 text v-btn v-btn--text theme--light v-size--large secondary--text" style="font-size: 1rem;">
-<span class="v-btn__content"> master <i aria-hidden="true" class="v-icon notranslate ml-1 mdi mdi-account-circle theme--light" style="font-size: 36px;">
-</i>
-</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</header>
-<main data-v-e0cb4de6="" class="v-main" data-booted="true" style="padding: 64px 0px 27px 256px;">
-<div class="v-main__wrap">
-<div data-v-e0cb4de6="" class="container fill-height container--fluid">
-<div data-v-e0cb4de6="" class="layout">
-<div class="d-flex flex-column flex-grow-1">
-<div class="d-flex align-center py-3">
-<div>
-<div class="text-h5 font-weight-bold">KT 캠페인</div>
-<ul class="v-breadcrumbs pa-0 py-1 theme--light">
-<li>
-<a href="/campaign" class="v-breadcrumbs__item">캠페인 관리</a>
-</li>
-<li class="v-breadcrumbs__divider">/</li>
-<li>
-<div class="v-breadcrumbs__item">KT 캠페인</div>
-</li>
-</ul>
-</div>
-<div class="spacer">
-</div>
-<button type="button" class="v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--large">
-<span class="v-btn__content"> 템플릿 만들기 </span>
-</button>
-</div>
-<div class="mb-2 v-card v-sheet theme--light">
-<div class="row pa-2 row--dense">
-<div class="text--secondary text-subtitle-2 d-flex align-center col-sm-2 col-12"> 캠페인 상태 </div>
-<div class="col col-10">
-<div class="v-input my-1 pt-0 v-input--hide-details theme--light v-input--selection-controls v-input--radio-group v-input--radio-group--row">
-<div class="v-input__control">
-<div class="v-input__slot" style="height: auto;">
-<div role="radiogroup" aria-labelledby="input-110" class="v-input--radio-group__input">
-<div class="v-radio theme--light v-item--active">
-<div class="v-input--selection-controls__input">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-radiobox-marked theme--light primary--text">
-</i>
-<input aria-checked="true" id="input-111" role="radio" type="radio" name="radio-110" value="" />
-<div class="v-input--selection-controls__ripple primary--text">
-</div>
-</div>
-<label for="input-111" class="v-label theme--light" style="left: 0px; right: auto; position: relative;">전체</label>
-</div>
-<div class="v-radio theme--light">
-<div class="v-input--selection-controls__input">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-radiobox-blank theme--light">
-</i>
-<input aria-checked="false" id="input-113" role="radio" type="radio" name="radio-110" value="approval" />
-<div class="v-input--selection-controls__ripple">
-</div>
-</div>
-<label for="input-113" class="v-label theme--light" style="left: 0px; right: auto; position: relative;">승인</label>
-</div>
-<div class="v-radio theme--light">
-<div class="v-input--selection-controls__input">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-radiobox-blank theme--light">
-</i>
-<input aria-checked="false" id="input-115" role="radio" type="radio" name="radio-110" value="disapproval" />
-<div class="v-input--selection-controls__ripple">
-</div>
-</div>
-<label for="input-115" class="v-label theme--light" style="left: 0px; right: auto; position: relative;">미승인</label>
-</div>
-<div class="v-radio theme--light">
-<div class="v-input--selection-controls__input">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-radiobox-blank theme--light">
-</i>
-<input aria-checked="false" id="input-117" role="radio" type="radio" name="radio-110" value="end" />
-<div class="v-input--selection-controls__ripple">
-</div>
-</div>
-<label for="input-117" class="v-label theme--light" style="left: 0px; right: auto; position: relative;">종료</label>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="text--secondary text-subtitle-2 d-flex align-center col-sm-2 col-12"> 조회 기간 </div>
-<div class="col-sm-8 col-12">
-<div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty v-input--dense theme--light v-text-field v-text-field--is-booted v-text-field--enclosed v-text-field--outlined">
-<div class="v-input__control">
-<div class="v-input__slot">
-<div class="v-input__prepend-inner">
-<div class="v-input__icon v-input__icon--prepend-inner">
-<button type="button" aria-label="prepend icon" class="v-icon notranslate v-icon--link mdi mdi-calendar theme--light">
-</button>
-</div>
-</div>
-<fieldset aria-hidden="true">
-<legend style="width: 0px;">
-<span class="notranslate">​</span>
-</legend>
-</fieldset>
-<div class="v-text-field__slot">
-<input role="button" aria-haspopup="true" aria-expanded="false" id="input-121" type="text" />
-</div>
-</div>
-</div>
-</div>
-<div class="v-menu">
-<!---->
-</div>
-</div>
-<div class="col-sm-2 col-12">
-<button type="button" class="v-btn v-btn--block v-btn--is-elevated v-btn--has-bg theme--light v-size--default primary" style="height: 40px;">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-magnify theme--light">
-</i> 조회 </span>
-</button>
-</div>
-</div>
-</div>
-<div class="v-card v-sheet theme--light" id="scrolling-sheet" style="position: relative; width: 100%; height: calc(-415px + 100vh); overflow: hidden auto;">
-<header class="v-sheet theme--light v-toolbar v-toolbar--absolute v-app-bar v-app-bar--elevate-on-scroll v-app-bar--hide-shadow" style="height: 64px; margin-top: 0px; transform: translateY(0px); left: 0px; right: 0px; position: sticky; box-shadow: rgba(85, 85, 85, 0.18) 0px 10px 20px -1px;" data-booted="true">
-<div class="v-toolbar__content" style="height: 64px;">
-<div class="v-item-group theme--light v-slide-group v-chip-group">
-<div class="v-slide-group__prev v-slide-group__prev--disabled">
-<!---->
-</div>
-<div class="v-slide-group__wrapper">
-<div class="v-slide-group__content">
-<span tabindex="0" class="v-chip v-slide-item--active v-chip--active v-chip--clickable v-chip--label theme--light v-size--default" style="background-color: var(--v-primary-base); border-color: var(--v-primary-base); color: white; font-weight: 700;">
-<span class="v-chip__content"> 전체 </span>
-</span>
-<span tabindex="0" class="v-chip v-chip--clickable v-chip--label v-chip--no-color theme--light v-size--default" style="color: black; font-weight: 400;">
-<span class="v-chip__content"> KT기본상품 </span>
-</span>
-</div>
-</div>
-<div class="v-slide-group__next v-slide-group__next--disabled">
-<!---->
-</div>
-</div>
-<div class="spacer">
-</div>
-<div class="v-item-group theme--light v-btn-toggle v-btn-toggle--dense v-btn-toggle--group primary--text">
-<button type="button" value="grid" class="mx-0 v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-view-grid theme--light">
-</i>
-</span>
-</button>
-<button type="button" value="list" class="mx-0 v-btn active-button v-btn--active v-btn--is-elevated v-btn--has-bg theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-view-list theme--light" style="font-size: 28px;">
-</i>
-</span>
-</button>
-</div>
-</div>
-</header>
-<div class="v-data-table flex-grow-1 v-data-table--has-bottom theme--light">
-<div class="v-data-table__wrapper">
-<table>
-<colgroup>
-<col class="" />
-<col class="" />
-<col class="" />
-<col class="" />
-<col class="" />
-<col class="" />
-<col class="" />
-<col class="" />
-</colgroup>
-<thead class="v-data-table-header">
-<tr>
-<th role="columnheader" scope="col" aria-label="썸네일" class="text-center">
-<span>썸네일</span>
-</th>
-<th role="columnheader" scope="col" aria-label="상품구분: 정렬되지 않았습니다. 오름차순으로 정렬하려면 활성화하십시오." aria-sort="none" class="text-start sortable">
-<span>상품구분</span>
-<i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;">
-</i>
-</th>
-<th role="columnheader" scope="col" aria-label="캠페인코드: 정렬되지 않았습니다. 오름차순으로 정렬하려면 활성화하십시오." aria-sort="none" class="text-start sortable">
-<span>캠페인코드</span>
-<i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;">
-</i>
-</th>
-<th role="columnheader" scope="col" aria-label="캠페인명: 정렬되지 않았습니다. 오름차순으로 정렬하려면 활성화하십시오." aria-sort="none" class="text-start sortable">
-<span>캠페인명</span>
-<i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;">
-</i>
-</th>
-<th role="columnheader" scope="col" aria-label="기간: 정렬되지 않았습니다. 오름차순으로 정렬하려면 활성화하십시오." aria-sort="none" class="text-start sortable">
-<span>기간</span>
-<i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;">
-</i>
-</th>
-<th role="columnheader" scope="col" aria-label="url" class="text-start">
-<span>url</span>
-</th>
-<th role="columnheader" scope="col" aria-label="승인여부: 정렬되지 않았습니다. 오름차순으로 정렬하려면 활성화하십시오." aria-sort="none" class="text-center sortable">
-<span>승인여부</span>
-<i aria-hidden="true" class="v-icon notranslate v-data-table-header__icon mdi mdi-arrow-up theme--light" style="font-size: 18px;">
-</i>
-</th>
-<th role="columnheader" scope="col" aria-label="설정" class="text-center">
-<span>설정</span>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign13-1743465974630/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-219018106583</td>
-<td class="text-start">(안내) 캐치콜플러스 추천_소매</td>
-<td class="text-start">
-<div>2025-04-01 ~ 2025-05-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/119/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign12-1743403662596/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-218798433181</td>
-<td class="text-start">(정책) 소상공인 상품(하이오더 등) 안내</td>
-<td class="text-start">
-<div>2025-03-17 ~ 2025-04-30</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/118/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign11-1741163308007/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-<div style="position: absolute; background-color: rgba(0, 0, 0, 0.4); width: 100%; height: 100%;">
-</div>
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-218333531038</td>
-<td class="text-start">(정책) 기변+따로살아도가족결합</td>
-<td class="text-start">
-<div>2025-03-05 ~ 2025-04-01</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/117/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign10-1741154385044/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-<div style="position: absolute; background-color: rgba(0, 0, 0, 0.4); width: 100%; height: 100%;">
-</div>
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-218256228257</td>
-<td class="text-start">(정책) 기변 펫 상조 추천</td>
-<td class="text-start">
-<div>2025-03-05 ~ 2025-03-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/116/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign06-1736820298610/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-216868635957</td>
-<td class="text-start">(정책) 초등 자녀 기변 안내</td>
-<td class="text-start">
-<div>2025-01-14 ~ 2025-07-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/112/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign05-1736815804732/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-216868311349</td>
-<td class="text-start">(정책) 키즈폰 신규 가망 고객</td>
-<td class="text-start">
-<div>2025-01-14 ~ 2025-07-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/105/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/DefaultPage_new-1734341233989/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">default</td>
-<td class="text-start">(공통) 디폴트 페이지_new</td>
-<td class="text-start">
-<div>2024-12-01 ~ 2025-07-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/79/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign04_new-1734340534074/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-215657149127</td>
-<td class="text-start">(정책) 아이폰 단말 기변 안내_new</td>
-<td class="text-start">
-<div>2024-12-01 ~ 2025-07-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/77/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign03_new-1734339825003/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-215657045186</td>
-<td class="text-start">(정책) 갤럭시 단말 기변 안내_new</td>
-<td class="text-start">
-<div>2025-01-24 ~ 2025-07-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/73/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign02_new-1734330008402/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-216582891912</td>
-<td class="text-start">(정책) 기변+제휴카드 교체 발급_new</td>
-<td class="text-start">
-<div>2025-01-24 ~ 2025-07-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/72/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-<tr class="">
-<td class="text-center">
-<div class="v-image v-responsive rounded my-1 theme--light" style="border: thin solid rgba(0, 0, 0, 0.17); min-width: 100px;">
-<div class="v-responsive__sizer" style="padding-bottom: 71.4286%;">
-</div>
-<div class="v-image__image v-image__image--cover" style="background-image: url(&quot;https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign01_new-1734325163442/thumbnail.png&quot;); background-position: center top;">
-</div>
-<!---->
-<div class="v-responsive__content">
-</div>
-</div>
-</td>
-<td class="text-start">KT기본 상품</td>
-<td class="text-start">1-216583046559</td>
-<td class="text-start">(정책) 기변/요금할인지원금 재약정</td>
-<td class="text-start">
-<div>2025-01-24 ~ 2025-07-31</div>
-</td>
-<td class="text-start">
-<a style="word-break: break-all;"> https://kt.baropage.com/tmpl/70/preview </a>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--small">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-content-copy theme--light" style="font-size: 16px;">
-</i>
-</span>
-</button>
-</td>
-<td class="text-center">
-<span depressed="" small="" class="error--text"> 승인 </span>
-</td>
-<td class="text-center">
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-pencil theme--light">
-</i>
-</span>
-</button>
-<button type="button" class="v-btn v-btn--icon v-btn--round theme--light v-size--default error--text">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-file-edit theme--light">
-</i>
-</span>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="v-data-footer">
-<div class="v-data-footer__select">페이지 당 행 :<div class="v-input v-input--hide-details v-input--is-label-active v-input--is-dirty v-input--is-focused theme--light v-text-field v-text-field--is-booted v-select primary--text">
-<div class="v-input__control">
-<div role="button" aria-haspopup="listbox" aria-expanded="false" aria-owns="list-248" class="v-input__slot">
-<div class="v-select__slot">
-<div class="v-select__selections">
-<div class="v-select__selection v-select__selection--comma">모두</div>
-<input aria-label="페이지 당 행 :" id="input-248" readonly="readonly" type="text" aria-readonly="false" autocomplete="off" aria-activedescendant="list-item-257-3" />
-</div>
-<div class="v-input__append-inner">
-<div class="v-input__icon v-input__icon--append">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--light primary--text">
-</i>
-</div>
-</div>
-<input type="hidden" value="-1" />
-</div>
-<div class="v-menu">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="v-data-footer__pagination">11 개 중 1-11</div>
-<div class="v-data-footer__icons-before">
-<button type="button" disabled="disabled" class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default" aria-label="이전 페이지">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-chevron-left theme--light">
-</i>
-</span>
-</button>
-</div>
-<div class="v-data-footer__icons-after">
-<button type="button" class="v-btn v-btn--disabled v-btn--icon v-btn--round v-btn--text theme--light v-size--default" aria-label="다음 페이지" disabled="disabled">
-<span class="v-btn__content">
-<i aria-hidden="true" class="v-icon notranslate mdi mdi-chevron-right theme--light">
-</i>
-</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="v-dialog__container">
-<!---->
-</div>
-</div>
-</div>
-</div>
-<footer data-v-e0cb4de6="" class="v-footer v-sheet theme--light v-footer--fixed v-footer--inset" data-booted="true" style="left: 256px; right: 0px; bottom: 0px;">
-<div data-v-e0cb4de6="" class="spacer">
-</div>
-<div data-v-e0cb4de6="" class="overline"> Built with 바로 페이지 관리자 </div>
-</footer>
-</div>
-</main>
-</div>
-<div class="v-snack v-snack--bottom v-snack--has-background">
-<div class="v-snack__wrapper v-sheet theme--dark black" style="display: none;">
-<div role="status" aria-live="polite" class="v-snack__content">
-<div class="text-center">  </div>
-<!---->
-</div>
-<div class="v-snack__action ">
-</div>
-</div>
-</div>
-</div>
-<div class="v-menu__content theme--light" style="max-height: 304px; min-width: 44px; top: 1192px; left: 2515px; transform-origin: left top; z-index: 8; display: none;">
-<div role="listbox" tabindex="-1" class="v-list v-select-list v-sheet theme--light theme--light" id="list-248">
-<div tabindex="0" aria-selected="false" id="list-item-257-0" role="option" class="v-list-item v-list-item--link theme--light">
-<div class="v-list-item__content">
-<div class="v-list-item__title">5</div>
-</div>
-</div>
-<div tabindex="0" aria-selected="false" id="list-item-257-1" role="option" class="v-list-item v-list-item--link theme--light">
-<div class="v-list-item__content">
-<div class="v-list-item__title">10</div>
-</div>
-</div>
-<div tabindex="0" aria-selected="false" id="list-item-257-2" role="option" class="v-list-item v-list-item--link theme--light">
-<div class="v-list-item__content">
-<div class="v-list-item__title">15</div>
-</div>
-</div>
-<div tabindex="0" aria-selected="true" id="list-item-257-3" role="option" class="v-list-item primary--text v-list-item--active v-list-item--link theme--light v-list-item--highlighted">
-<div class="v-list-item__content">
-<div class="v-list-item__title">모두</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script src="/js/chunk-vendors.256811a4.js">
-</script>
-<script src="/js/app.107dc881.js">
-</script>
-<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
-<defs id="SvgjsDefs1002"/>
-<polyline id="SvgjsPolyline1003" points="0,0"/>
-<path id="SvgjsPath1004" d="M0 0 "/>
-</svg>
-<div class="stephow-hover-overlay" style="opacity: 0;">
-</div>
-<div id="guideflo-extension-unique-identifier" style="display: none;">
-</div>
+    <div class="header">
+        <h1>KT바로페이지 캠페인 목록</h1>
+        <p>현재 진행 중인 캠페인 목록입니다.</p>
+    </div>
+
+    <div class="campaign-list" id="campaign-list"></div>
+
+    <script>
+        // 최신 관리자 기준 캠페인 정보
+        const campaigns = [
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign23-1752537957268/thumbnail.png",
+                title: "폴더블 신모델 기변 안내_20~40대",
+                period: "2025-07-15 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/129/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign22-1752481146224/thumbnail.png",
+                title: "폴더블 신모델 기변 안내_50~60대",
+                period: "2025-07-15 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/128/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign21-1750643220088/thumbnail.png",
+                title: "(정책) 인터넷천만_무선기변&TV3년이상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/127/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign20-1750643091323/thumbnail.png",
+                title: "(정책) 인터넷천만_무선기변&인터넷3년이상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/126/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign19-1750643001339/thumbnail.png",
+                title: "(정책) 인터넷천만_무선기변&인터넷3년이상(AP미보유)",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/125/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign18-1750642865315/thumbnail.png",
+                title: "(고객케어) 인터넷천만_인터넷혜택대상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/124/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign17-1750227200413/thumbnail.png",
+                title: "(고객케어) 인터넷천만_TV혜택대상",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/123/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign16-1750058499519/thumbnail.png",
+                title: "(고객케어) 인터넷천만_인터넷혜택대상자(AP미보유)",
+                period: "2025-06-23 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/122/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign14-1745286143973/thumbnail.png",
+                title: "(디채시) 고용량 단말 이용고객 O2O특화모델 안내",
+                period: "2025-04-22 ~ 2025-12-31",
+                url: "https://kt.baropage.com/tmpl/120/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign06-1736820298610/thumbnail.png",
+                title: "(정책) 초등 자녀 기변 안내",
+                period: "2025-01-14 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/112/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign05-1736815804732/thumbnail.png",
+                title: "(정책) 키즈폰 신규 가망 고객",
+                period: "2025-01-14 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/105/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/DefaultPage_new-1734341233989/thumbnail.png",
+                title: "(공통) 디폴트 페이지_new",
+                period: "2024-12-01 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/79/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign04_new-1734340534074/thumbnail.png",
+                title: "(정책) 아이폰 단말 기변 안내_new",
+                period: "2024-12-01 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/77/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign03_new-1734339825003/thumbnail.png",
+                title: "(정책) 갤럭시 단말 기변 안내_new",
+                period: "2025-01-24 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/73/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign02_new-1734330008402/thumbnail.png",
+                title: "(정책) 기변+제휴카드 교체 발급_new",
+                period: "2025-01-24 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/72/preview"
+            },
+            {
+                type: "KT기본 상품",
+                thumbnail: "https://kt-waffle-resource.s3.ap-northeast-2.amazonaws.com/image/template/campaign01_new-1734325163442/thumbnail.png",
+                title: "기변/요금할인지원금 재약정",
+                period: "2025-01-24 ~ 2025-07-31",
+                url: "https://kt.baropage.com/tmpl/70/preview"
+            }
+        ];
+
+        // 캠페인 카드 렌더링
+        const list = document.getElementById('campaign-list');
+        list.innerHTML = campaigns.map(c => `
+            <div class="campaign-card">
+                ${c.type === 'KT기본 상품' ? `<span class="badge">KT기본 상품</span>` : `<div class="campaign-type">${c.type}</div>`}
+                <div class="campaign-thumbnail">
+                    ${c.thumbnail ? `<img src="${c.thumbnail}" alt="캠페인 썸네일">` : ''}
+                </div>
+                <div class="campaign-title">${c.title}</div>
+                <div class="campaign-period">${c.period}</div>
+                <a href="${c.url}" class="campaign-url">
+                    ${c.url}
+                    <span class="copy-icon">📋</span>
+                </a>
+            </div>
+        `).join('');
+
+        // URL 복사 기능
+        document.querySelectorAll('.copy-icon').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.parentElement.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('URL이 복사되었습니다.');
+                });
+            });
+        });
+    </script>
 </body>
-</html>
+</html> 
