@@ -147,6 +147,24 @@
         .copy-icon:hover {
             background-color: rgba(0,0,0,0.08);
         }
+
+        /* TOP 버튼 스타일 */
+        #top-btn {
+            position: fixed;
+            right: 24px;
+            bottom: 32px;
+            z-index: 100;
+            background: #0087cf;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 22px;
+            font-size: 16px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0,135,207,0.12);
+            cursor: pointer;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -155,23 +173,21 @@
         <p>와플 아웃바운드 진행 시 발송중인 캠페인 목록입니다.</p>
     </div>
 
-    <!-- 7월 신규 캠페인 요약 접힘 영역 (카드형) -->
-    <div id="campaign-summary" class="campaign-summary-collapsed">
-        <div id="summary-toggle" style="cursor:pointer;">
-            <div class="campaign-card" style="margin-bottom:0;">
-                <span class="badge">7월 신규 캠페인</span>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span id="summary-count" style="font-weight:600; color:#0087cf;"></span>
-                    <span style="color:#222; font-size:15px;">캠페인(펼쳐보기)*</span>
-                    <span id="summary-arrow" style="margin-left:auto; font-size:18px;">▼</span>
-                </div>
-                <div id="summary-list" style="display:none; flex-direction:column; gap:10px; margin-top:12px;"></div>
+    <!-- 7월 신규 캠페인 요약 영역 (카드형, 기본 펼침) -->
+    <div id="campaign-summary" class="campaign-summary-expanded">
+        <div class="campaign-card" style="margin-bottom:0;">
+            <span class="badge">7월 신규 캠페인</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span id="summary-count" style="font-weight:600; color:#0087cf;"></span>
+                <span style="color:#222; font-size:15px;">캠페인</span>
             </div>
+            <div id="summary-list" style="display:flex; flex-direction:column; gap:10px; margin-top:12px;"></div>
         </div>
     </div>
 
     <div class="campaign-list" id="campaign-list"></div>
-    <div id="pagination" style="display:flex; justify-content:center; align-items:center; gap:12px; margin-top:24px;"></div>
+    <!-- TOP 버튼 -->
+    <button id="top-btn" style="position:fixed; right:24px; bottom:32px; z-index:100; background:#0087cf; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:16px; font-weight:700; box-shadow:0 2px 8px rgba(0,135,207,0.12); cursor:pointer; display:none;">TOP</button>
 
     <script>
         // 최신 관리자 기준 캠페인 정보
@@ -301,7 +317,7 @@
         }
         const thisMonthCampaigns = campaigns.filter(isThisMonthCampaign);
 
-        // 캠페인 요약 영역 렌더링 (카드 내부에 리스트)
+        // 캠페인 요약 영역 렌더링 (카드 내부에 리스트, 기본 펼침)
         const summaryCount = document.getElementById('summary-count');
         const summaryList = document.getElementById('summary-list');
         summaryCount.textContent = `${thisMonthCampaigns.length}개`;
@@ -312,130 +328,59 @@
             </div>
         `).join('');
 
-        // 접힘/펼침 토글 (카드 내부에 리스트)
-        const summaryToggle = document.getElementById('summary-toggle');
-        const summaryArrow = document.getElementById('summary-arrow');
-        let summaryOpen = false;
-        summaryToggle.addEventListener('click', function() {
-            summaryOpen = !summaryOpen;
-            summaryList.style.display = summaryOpen ? 'flex' : 'none';
-            summaryArrow.textContent = summaryOpen ? '▲' : '▼';
-        });
-
-        // 페이징 처리
+        // 캠페인 카드 UI 개선 (페이징 없이 전체 표시, 바로가기 버튼 제거)
         const list = document.getElementById('campaign-list');
-        const pagination = document.getElementById('pagination');
-        const PAGE_SIZE = 5;
-        let currentPage = 1;
-        const totalPages = Math.ceil(campaigns.length / PAGE_SIZE);
-
-        function renderCampaignPage(page) {
-            const startIdx = (page - 1) * PAGE_SIZE;
-            const endIdx = startIdx + PAGE_SIZE;
-            const pageCampaigns = campaigns.slice(startIdx, endIdx);
-            list.innerHTML = pageCampaigns.map((c, idx) => `
-                <div class="campaign-card">
-                    ${c.type === 'KT기본 상품' ? `<span class="badge">KT기본 상품</span>` : `<div class="campaign-type">${c.type}</div>`}
-                    <div class="campaign-thumbnail" data-url="${c.url}" style="cursor:pointer;">
-                        ${c.thumbnail ? `<img src="${c.thumbnail}" alt="캠페인 썸네일">` : ''}
+        function renderCampaignList() {
+            list.innerHTML = campaigns.map((c, idx) => `
+                <div class="campaign-card" style="padding:16px 12px; display:flex; align-items:center; gap:16px; min-height:90px;">
+                    <div class="campaign-thumbnail" data-url="${c.url}" style="width:70px; height:70px; min-width:70px; min-height:70px; margin-bottom:0; background:#f8f9fa; display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:10px;">
+                        ${c.thumbnail ? `<img src="${c.thumbnail}" alt="캠페인 썸네일" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">` : ''}
                     </div>
-                    <div class="campaign-title">${c.title}</div>
-                    <div class="campaign-period">${c.period}</div>
-                    <a href="${c.url}" class="campaign-url">
-                        ${c.url}
-                        <span class="copy-icon">📋</span>
-                    </a>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+                        <div class="campaign-title" style="font-size:16px; font-weight:600; color:#222; cursor:pointer;">${c.title}</div>
+                        <div class="campaign-period" style="font-size:13px; color:#0087cf; cursor:pointer;">${c.period}</div>
+                    </div>
                 </div>
             `).join('');
 
-            // 이미지 클릭 시 preview 링크로 이동
+            // 이미지, 캠페인명, 기간 클릭 시 preview 링크로 이동
             document.querySelectorAll('.campaign-thumbnail').forEach(thumbnail => {
                 thumbnail.addEventListener('click', function() {
                     const url = this.getAttribute('data-url');
                     window.open(url, '_blank');
                 });
             });
-
-            // URL 복사 기능
-            document.querySelectorAll('.copy-icon').forEach(icon => {
-                icon.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const url = this.parentElement.href;
-                    navigator.clipboard.writeText(url).then(() => {
-                        alert('URL이 복사되었습니다.');
-                    });
+            document.querySelectorAll('.campaign-title').forEach(title => {
+                title.addEventListener('click', function() {
+                    const card = this.closest('.campaign-card');
+                    const url = card.querySelector('.campaign-thumbnail').getAttribute('data-url');
+                    window.open(url, '_blank');
+                });
+            });
+            document.querySelectorAll('.campaign-period').forEach(period => {
+                period.addEventListener('click', function() {
+                    const card = this.closest('.campaign-card');
+                    const url = card.querySelector('.campaign-thumbnail').getAttribute('data-url');
+                    window.open(url, '_blank');
                 });
             });
         }
 
-        function renderPagination() {
-            pagination.innerHTML = '';
-            if (totalPages <= 1) return;
-            const prevBtn = document.createElement('button');
-            prevBtn.textContent = '이전';
-            prevBtn.style.padding = '6px 16px';
-            prevBtn.style.borderRadius = '6px';
-            prevBtn.style.border = '1px solid #e3e3e3';
-            prevBtn.style.background = currentPage === 1 ? '#f0f0f0' : '#0087cf';
-            prevBtn.style.color = currentPage === 1 ? '#aaa' : '#fff';
-            prevBtn.disabled = currentPage === 1;
-            prevBtn.onclick = function() {
-                if (currentPage > 1) {
-                    currentPage--;
-                    renderCampaignPage(currentPage);
-                    renderPagination();
-                }
-            };
-            pagination.appendChild(prevBtn);
-
-            // 페이지 번호 표시
-            const pageInfo = document.createElement('span');
-            pageInfo.textContent = `${currentPage} / ${totalPages}`;
-            pageInfo.style.fontSize = '15px';
-            pageInfo.style.fontWeight = '600';
-            pageInfo.style.color = '#0087cf';
-            pagination.appendChild(pageInfo);
-
-            const nextBtn = document.createElement('button');
-            nextBtn.textContent = '다음';
-            nextBtn.style.padding = '6px 16px';
-            nextBtn.style.borderRadius = '6px';
-            nextBtn.style.border = '1px solid #e3e3e3';
-            nextBtn.style.background = currentPage === totalPages ? '#f0f0f0' : '#0087cf';
-            nextBtn.style.color = currentPage === totalPages ? '#aaa' : '#fff';
-            nextBtn.disabled = currentPage === totalPages;
-            nextBtn.onclick = function() {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    renderCampaignPage(currentPage);
-                    renderPagination();
-                }
-            };
-            pagination.appendChild(nextBtn);
-        }
+        // TOP 버튼 동작
+        const topBtn = document.getElementById('top-btn');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 200) {
+                topBtn.style.display = 'block';
+            } else {
+                topBtn.style.display = 'none';
+            }
+        });
+        topBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
         // 최초 렌더링
-        renderCampaignPage(currentPage);
-        renderPagination();
-
-        // 이미지 클릭 시 preview 링크로 이동
-        document.querySelectorAll('.campaign-thumbnail').forEach(thumbnail => {
-            thumbnail.addEventListener('click', function() {
-                const url = this.getAttribute('data-url');
-                window.open(url, '_blank');
-            });
-        });
-
-        // URL 복사 기능
-        document.querySelectorAll('.copy-icon').forEach(icon => {
-            icon.addEventListener('click', function(e) {
-                e.preventDefault();
-                const url = this.parentElement.href;
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('URL이 복사되었습니다.');
-                });
-            });
-        });
+        renderCampaignList();
     </script>
 </body>
-</html> 
+</html>
