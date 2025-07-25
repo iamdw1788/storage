@@ -24,6 +24,10 @@
             text-align: center;
         }
 
+        #campaign-summary {
+            margin-bottom: 28px;
+        }
+
         .header h1 {
             font-size: 26px;
             color: #0087cf;
@@ -84,7 +88,7 @@
             font-weight: 600;
             border-radius: 999px;
             padding: 4px 14px;
-            margin-bottom: 10px;
+            margin-bottom: 18px; /* 기존 10px -> 18px */
             box-shadow: 0 2px 8px rgba(0,135,207,0.08);
             letter-spacing: -0.5px;
         }
@@ -147,8 +151,23 @@
 </head>
 <body>
     <div class="header">
-        <h1>KT바로페이지 캠페인 목록</h1>
-        <p>현재 진행 중인 캠페인 목록입니다.</p>
+        <h1>KT 바로페이지 캠페인 목록</h1>
+        <p>와플 아웃바운드 진행 시 발송중인 캠페인 목록입니다.</p>
+    </div>
+
+    <!-- 7월 신규 캠페인 요약 접힘 영역 (카드형) -->
+    <div id="campaign-summary" class="campaign-summary-collapsed">
+        <div id="summary-toggle" style="cursor:pointer;">
+            <div class="campaign-card" style="margin-bottom:0;">
+                <span class="badge">7월 신규 캠페인</span>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span id="summary-count" style="font-weight:600; color:#0087cf;"></span>
+                    <span style="color:#222; font-size:15px;">캠페인(펼쳐보기)*</span>
+                    <span id="summary-arrow" style="margin-left:auto; font-size:18px;">▼</span>
+                </div>
+                <div id="summary-list" style="display:none; flex-direction:column; gap:10px; margin-top:12px;"></div>
+            </div>
+        </div>
     </div>
 
     <div class="campaign-list" id="campaign-list"></div>
@@ -270,12 +289,44 @@
             }
         ];
 
+        // 이번달 캠페인만 필터 (기간 내 오늘 포함)
+        const today = new Date();
+        function isThisMonthCampaign(c) {
+            // 기간: "YYYY-MM-DD ~ YYYY-MM-DD"
+            const [start, end] = c.period.split('~').map(s => s.trim());
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            return today >= startDate && today <= endDate && today.getMonth() === startDate.getMonth();
+        }
+        const thisMonthCampaigns = campaigns.filter(isThisMonthCampaign);
+
+        // 캠페인 요약 영역 렌더링 (카드 내부에 리스트)
+        const summaryCount = document.getElementById('summary-count');
+        const summaryList = document.getElementById('summary-list');
+        summaryCount.textContent = `${thisMonthCampaigns.length}개`;
+        summaryList.innerHTML = thisMonthCampaigns.map(c => `
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 0; gap:10px;">
+                <span style="font-size:14px; color:#222; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.title}</span>
+                <a href="${c.url}" target="_blank" style="background:#0087cf; color:#fff; border-radius:6px; padding:4px 12px; text-decoration:none; font-size:13px; font-weight:600;">바로가기</a>
+            </div>
+        `).join('');
+
+        // 접힘/펼침 토글 (카드 내부에 리스트)
+        const summaryToggle = document.getElementById('summary-toggle');
+        const summaryArrow = document.getElementById('summary-arrow');
+        let summaryOpen = false;
+        summaryToggle.addEventListener('click', function() {
+            summaryOpen = !summaryOpen;
+            summaryList.style.display = summaryOpen ? 'flex' : 'none';
+            summaryArrow.textContent = summaryOpen ? '▲' : '▼';
+        });
+
         // 캠페인 카드 렌더링
         const list = document.getElementById('campaign-list');
-        list.innerHTML = campaigns.map(c => `
+        list.innerHTML = campaigns.map((c, idx) => `
             <div class="campaign-card">
                 ${c.type === 'KT기본 상품' ? `<span class="badge">KT기본 상품</span>` : `<div class="campaign-type">${c.type}</div>`}
-                <div class="campaign-thumbnail">
+                <div class="campaign-thumbnail" data-url="${c.url}" style="cursor:pointer;">
                     ${c.thumbnail ? `<img src="${c.thumbnail}" alt="캠페인 썸네일">` : ''}
                 </div>
                 <div class="campaign-title">${c.title}</div>
@@ -286,6 +337,14 @@
                 </a>
             </div>
         `).join('');
+
+        // 이미지 클릭 시 preview 링크로 이동
+        document.querySelectorAll('.campaign-thumbnail').forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                window.open(url, '_blank');
+            });
+        });
 
         // URL 복사 기능
         document.querySelectorAll('.copy-icon').forEach(icon => {
